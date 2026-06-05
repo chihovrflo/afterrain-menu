@@ -12,33 +12,38 @@
         --color-secondary: #5A6561;/* 柔和灰綠 */
         --color-accent: #C5A880;   /* 霧金 */
         --color-muted: #9A8F80;    /* 灰金 */
-        --transition-lux: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* 頂級精品滑順曲線 */
+        --transition-lux: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); /* 精品滑順曲線 */
     }
 
     body {
         margin: 0;
-        padding: 60px 24px;
-        font-family: "Times New Roman", Times, "Noto Serif TC", "PingFang TC", "Songti TC", serif;
+        padding: 0; /* 移除 body padding，交給 container 處理 */
         background: var(--color-bg);
         color: var(--color-primary);
-        line-height: 1.8;
+        font-family: "Times New Roman", Times, "Noto Serif TC", "PingFang TC", "Songti TC", serif;
         -webkit-font-smoothing: antialiased;
-        /* 防止手機版長按文字跳出選擇框，破壞美感 */
         -webkit-user-select: none;
         user-select: none;
     }
 
+    /* 容器成為實體紙張主體 */
     .container {
         max-width: 450px;
         margin: 0 auto;
         position: relative;
+        padding: 60px 40px; /* 給予內部充足的呼吸空間 */
+        box-sizing: border-box;
+        min-height: 100vh;
     }
 
-    /* 高級感實體紙張細邊框 */
+    /* 高級感實體紙張內襯邊框：從 fixed 改為 absolute，完美釘死在網頁上 */
     .container::before {
         content: "";
-        position: fixed;
-        top: 20px; left: 20px; right: 20px; bottom: 20px;
+        position: absolute;
+        top: 20px; 
+        left: 20px; 
+        right: 20px; 
+        bottom: 20px;
         border: 1px solid rgba(197, 168, 128, 0.25);
         pointer-events: none;
         z-index: 10;
@@ -88,49 +93,48 @@
 
     /* Menu Section Base */
     .section {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
         position: relative;
-        padding: 16px 20px;
+        padding: 16px 12px;
+        margin-left: -12px;
+        margin-right: -12px;
         border-radius: 8px;
         background: rgba(255, 255, 255, 0);
         transition: var(--transition-lux);
         cursor: pointer;
-        -webkit-tap-highlight-color: transparent; /* 移除手機原生醜陋的點擊藍色高亮 */
-        
-        /* 賦予優雅的滑入動畫，依序登場 */
+        -webkit-tap-highlight-color: transparent;
         animation: luxFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     .section:last-of-type {
-        margin-bottom: 60px;
+        margin-bottom: 40px;
     }
 
-    /* 為 5 款調酒設定手機登場時間差，創造流動感 */
-    .section:nth-of-type(1) { animation-delay: 0.2s; }
-    .section:nth-of-type(2) { animation-delay: 0.35s; }
-    .section:nth-of-type(3) { animation-delay: 0.5s; }
-    .section:nth-of-type(4) { animation-delay: 0.65s; }
-    .section:nth-of-type(5) { animation-delay: 0.8s; }
+    /* 動態登場延遲 */
+    .section:nth-of-type(1) { animation-delay: 0.15s; }
+    .section:nth-of-type(2) { animation-delay: 0.25s; }
+    .section:nth-of-type(3) { animation-delay: 0.35s; }
+    .section:nth-of-type(4) { animation-delay: 0.45s; }
+    .section:nth-of-type(5) { animation-delay: 0.55s; }
 
-    /* 💻 桌面端（電腦）滑鼠互動體驗 */
+    /* 💻 電腦端懸停 */
     @media (hover: hover) {
         .section:hover {
             transform: translateY(-4px);
-            background: rgba(197, 168, 128, 0.04);
-            box-shadow: 0 10px 30px rgba(26, 36, 33, 0.02);
+            background: rgba(197, 168, 128, 0.03);
         }
         .section:hover .drink {
             color: var(--color-accent);
         }
     }
     
-    /* 📱 行動端（手機）壓按觸覺回饋（極致關鍵！） */
-    .section:active {
-        transform: scale(0.97) translateY(0px); /* 輕微下沉回饋 */
-        background: rgba(197, 168, 128, 0.06) !important; /* 絲綢般微光襯底 */
-        transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* 壓下去的反應要快 */
+    /* 📱 手機端點擊激活狀態 */
+    .section.is-active {
+        transform: scale(0.97);
+        background: rgba(197, 168, 128, 0.05);
+        transition: all 0.1s ease;
     }
-    .section:active .drink {
+    .section.is-active .drink {
         color: var(--color-accent);
     }
 
@@ -193,46 +197,29 @@
 
     /* Footer Styling */
     footer {
-        margin-top: 80px;
+        margin-top: 60px;
+        padding-bottom: 20px;
         font-size: 10px;
         color: var(--color-muted);
         text-align: center;
         letter-spacing: 2px;
         line-height: 2;
+        position: relative;
+        z-index: 15;
         animation: luxFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
-        animation-delay: 1s;
+        animation-delay: 0.7s;
     }
 
-    /* RWD 手機版精緻邊距微調 */
+    /* 📱 行動端細緻修正 */
     @media (max-width: 480px) {
-        body {
-            padding: 50px 20px;
-        }
-        .container::before {
-            top: 15px; left: 15px; right: 15px; bottom: 15px; /* 讓邊框跟著螢幕大小呼吸縮放 */
-        }
-        .drink {
-            font-size: 19px; /* 手機上更優雅的字體大小比例 */
-        }
+        .container { padding: 50px 32px; }
+        .container::before { top: 16px; left: 16px; right: 16px; bottom: 16px; }
+        .drink { font-size: 19px; }
     }
 
-    /* 高級感登場動畫定義 */
     @keyframes luxFadeUp {
-        0% {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Print 印刷優化 */
-    @media print {
-        body { background: #fff; padding: 40px 20px; }
-        .container::before { border: 1px solid #e2d9cd; }
-        .section { transform: none !important; background: none !important; animation: none !important; }
+        0% { opacity: 0; transform: translateY(16px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 </style>
 </head>
@@ -252,6 +239,7 @@
     </header>
 
     <main>
+        <!-- 01 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°01</div>
@@ -266,6 +254,7 @@
             <div class="notes">✦ 清爽 ・ 微酸 ・ 茶香收尾</div>
         </div>
 
+        <!-- 02 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°02</div>
@@ -280,6 +269,7 @@
             <div class="notes">✦ 果香 ・ 乳酸感 ・ 輕盈易飲</div>
         </div>
 
+        <!-- 03 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°03</div>
@@ -294,6 +284,7 @@
             <div class="notes">✦ 茶香 ・ 果香平衡 ・ 乾淨收尾</div>
         </div>
 
+        <!-- 04 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°04</div>
@@ -308,6 +299,7 @@
             <div class="notes">✦ 多汁 ・ 熱帶果香 ・ 低酒感</div>
         </div>
 
+        <!-- 05 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°05</div>
@@ -330,6 +322,21 @@
     </footer>
 
 </div>
+
+<script>
+    document.querySelectorAll('.section').forEach(item => {
+        item.addEventListener('touchstart', () => {
+            item.classList.add('is-active');
+        }, { passive: true });
+        
+        item.addEventListener('touchend', () => {
+            item.classList.remove('is-active');
+        }, { passive: true });
+        item.addEventListener('touchcancel', () => {
+            item.classList.remove('is-active');
+        }, { passive: true });
+    });
+</script>
 
 </body>
 </html>
