@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>After Rain Tea Bar｜菜單</title>
+
+<style>
+    :root {
+        --color-bg: #FAF9F6;       /* 暖象牙白 */
+        --color-primary: #1A2421;  /* 暮色深綠 */
+        --color-secondary: #5A6561;/* 柔和灰綠 */
+        --color-accent: #C5A880;   /* 霧金 */
+        --color-muted: #9A8F80;    /* 灰金 */
+        --transition-lux: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* 頂級滑順曲線 */
+    }
+
+    body {
+        margin: 0;
+        padding: 60px 24px;
+        font-family: "Times New Roman", Times, "Noto Serif TC", "PingFang TC", "Songti TC", serif;
+        background: var(--color-bg);
+        color: var(--color-primary);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: 450px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    /* 高級感實體紙張細邊框 */
+    .container::before {
+        content: "";
+        position: fixed;
+        top: 20px; left: 20px; right: 20px; bottom: 20px;
+        border: 1px solid rgba(197, 168, 128, 0.25);
+        pointer-events: none;
+    }
+
+    /* Header Styling */
+    header {
+        text-align: center;
+        margin-bottom: 56px;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 24px;
+        letter-spacing: 5px;
+        margin: 0 0 10px 0;
+        font-weight: 500;
+        color: var(--color-primary);
+    }
+
+    .sub {
+        font-size: 11px;
+        color: var(--color-accent);
+        letter-spacing: 4px;
+        margin-bottom: 28px;
+        font-weight: 500;
+    }
+
+    .quote {
+        font-size: 13px;
+        color: var(--color-secondary);
+        max-width: 320px;
+        margin: 0 auto;
+        line-height: 1.8;
+        letter-spacing: 1px;
+    }
+
+    /* 裝飾分隔線 */
+    .divider {
+        width: 35px;
+        height: 1px;
+        background: var(--color-accent);
+        margin: 36px auto;
+        opacity: 0.6;
+    }
+
+    /* Menu Section & UX UX高級互動設計 */
+    .section {
+        margin-bottom: 44px;
+        position: relative;
+        padding: 12px;
+        margin-left: -12px;
+        margin-right: -12px;
+        border-radius: 4px;
+        transition: var(--transition-lux);
+        cursor: pointer;
+    }
+
+    .section:last-of-type {
+        margin-bottom: 60px;
+    }
+
+    /* 手機滑過或點擊時的奢華微互動 */
+    @media (hover: hover) {
+        .section:hover {
+            transform: translateY(-3px); /* 優雅上浮 */
+            background: rgba(197, 168, 128, 0.03); /* 極輕微的絲綢光澤襯底 */
+        }
+        .section:hover .drink {
+            color: var(--color-accent); /* 字體優雅轉霧金 */
+        }
+    }
+    
+    /* 觸控壓按回饋 */
+    .section:active {
+        transform: scale(0.99) translateY(-1px);
+        opacity: 0.85;
+    }
+
+    .menu-header {
+        margin-bottom: 4px;
+    }
+
+    .name {
+        font-size: 12px;
+        letter-spacing: 2px;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-transform: uppercase;
+    }
+
+    .tagline {
+        font-size: 11.5px;
+        font-style: italic;
+        color: var(--color-muted);
+        margin-bottom: 14px;
+        letter-spacing: 0.5px;
+    }
+
+    .drink {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: 14px;
+        letter-spacing: 2px;
+        transition: var(--transition-lux); /* 讓字體顏色轉變極度滑順 */
+    }
+
+    /* 高級風味結構排版 */
+    .meta-line {
+        font-size: 12.5px;
+        margin-bottom: 5px;
+        letter-spacing: 0.5px;
+    }
+
+    .meta-label {
+        color: var(--color-muted);
+        font-weight: 500;
+        display: inline-block;
+        width: 45px; /* 回歸中文字體的完美精準對齊寬度 */
+    }
+
+    .meta-content {
+        color: var(--color-secondary);
+    }
+
+    /* 風味小字區塊 */
+    .notes {
+        font-size: 11.5px;
+        color: var(--color-accent);
+        font-style: italic;
+        font-weight: 500;
+        margin-top: 14px;
+        letter-spacing: 1px;
+    }
+
+    /* Footer Styling */
+    footer {
+        margin-top: 80px;
+        font-size: 10px;
+        color: var(--color-muted);
+        text-align: center;
+        letter-spacing: 2px;
+        line-height: 2;
+    }
+
+    /* Print 印刷優化 */
+    @media print {
+        body { background: #fff; padding: 40px 20px; }
+        .container::before { border: 1px solid #e2d9cd; }
+        .section { transform: none !important; background: none !important; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>AFTER RAIN TEA BAR</h1>
+        <div class="sub">一晚限定 ｜ 山林雨後茶酒吧</div>
+        <div class="quote">
+            「雨停了，風還沒涼。
+            <br>在夜色點燃以前，借一場山林的雨後微醺。」
+        </div>
+        <div class="divider"></div>
+    </header>
+
+    <main>
+        <!-- 01 -->
+        <div class="section">
+            <div class="menu-header">
+                <div class="name">N°01</div>
+            </div>
+            <div class="drink">翠釀聽雨</div>
+            <div class="tagline">雨停之後的第一口空氣</div>
+            
+            <div class="meta-line">
+                <span class="meta-label">基底</span>
+                <span class="meta-content">梅酒 ・ 高山烏龍 ・ 檸檬 ・ 氣泡水</span>
+            </div>
+            <div class="notes">✦ 清爽 ・ 微酸 ・ 茶香收尾</div>
+        </div>
+
+        <!-- 02 -->
+        <div class="section">
+            <div class="menu-header">
+                <div class="name">N°02</div>
+            </div>
+            <div class="drink">繾綣晨霧</div>
+            <div class="tagline">悶熱空氣中的微微觸電感</div>
+            
+            <div class="meta-line">
+                <span class="meta-label">基底</span>
+                <span class="meta-content">乳酸氣泡酒 ・ 水蜜桃烏龍 ・ 檸檬 ・ 氣泡水</span>
+            </div>
+            <div class="notes">✦ 果香 ・ 乳酸感 ・ 輕盈易飲</div>
+        </div>
+
+        <!-- 03 -->
+        <div class="section">
+            <div class="menu-header">
+                <div class="name">N°03</div>
+            </div>
+            <div class="drink">冷露尋茶</div>
+            <div class="tagline">茶成為結構的輪廓</div>
+            
+            <div class="meta-line">
+                <span class="meta-label">基底</span>
+                <span class="meta-content">茶琴酒 ・ 水蜜桃烏龍 ・ 檸檬 ・ 氣泡水</span>
+            </div>
+            <div class="notes">✦ 茶香 ・ 果香平衡 ・ 乾淨收尾</div>
+        </div>
+
+        <!-- 04 -->
+        <div class="section">
+            <div class="menu-header">
+                <div class="name">N°04</div>
+            </div>
+            <div class="drink">熾陽拾果</div>
+            <div class="tagline">雨後叢林的果香爆發</div>
+            
+            <div class="meta-line">
+                <span class="meta-label">基底</span>
+                <span class="meta-content">鳳梨芒果酒 ・ 百香果氣泡 ・ 氣泡水</span>
+            </div>
+            <div class="notes">✦ 多汁 ・ 熱帶果香 ・ 低酒感</div>
+        </div>
+
+        <!-- 05 -->
+        <div class="section">
+            <div class="menu-header">
+                <div class="name">N°05</div>
+            </div>
+            <div class="drink">篝火夜語</div>
+            <div class="tagline">收帳篷前的最後一杯溫度</div>
+            
+            <div class="meta-line">
+                <span class="meta-label">基底</span>
+                <span class="meta-content">椪糖酒 ・ 咖啡利口酒 ・ 牛奶</span>
+            </div>
+            <div class="notes">✦ 焦糖 ・ 咖啡 ・ 奶香收尾</div>
+        </div>
+    </main>
+
+    <footer>
+        手作茶酒工藝 ｜ 建議慢飲以感受層次流動
+        <br>
+        AFTER RAIN TEA BAR ©
+    </footer>
+
+</div>
+
+</body>
+</html>
