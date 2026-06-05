@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>After Rain Tea Bar｜菜單</title>
 
 <style>
@@ -12,7 +12,7 @@
         --color-secondary: #5A6561;/* 柔和灰綠 */
         --color-accent: #C5A880;   /* 霧金 */
         --color-muted: #9A8F80;    /* 灰金 */
-        --transition-lux: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* 頂級滑順曲線 */
+        --transition-lux: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* 頂級精品滑順曲線 */
     }
 
     body {
@@ -23,6 +23,9 @@
         color: var(--color-primary);
         line-height: 1.8;
         -webkit-font-smoothing: antialiased;
+        /* 防止手機版長按文字跳出選擇框，破壞美感 */
+        -webkit-user-select: none;
+        user-select: none;
     }
 
     .container {
@@ -38,6 +41,7 @@
         top: 20px; left: 20px; right: 20px; bottom: 20px;
         border: 1px solid rgba(197, 168, 128, 0.25);
         pointer-events: none;
+        z-index: 10;
     }
 
     /* Header Styling */
@@ -45,6 +49,7 @@
         text-align: center;
         margin-bottom: 56px;
         position: relative;
+        animation: luxFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     h1 {
@@ -81,37 +86,52 @@
         opacity: 0.6;
     }
 
-    /* Menu Section & UX UX高級互動設計 */
+    /* Menu Section Base */
     .section {
-        margin-bottom: 44px;
+        margin-bottom: 40px;
         position: relative;
-        padding: 12px;
-        margin-left: -12px;
-        margin-right: -12px;
-        border-radius: 4px;
+        padding: 16px 20px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0);
         transition: var(--transition-lux);
         cursor: pointer;
+        -webkit-tap-highlight-color: transparent; /* 移除手機原生醜陋的點擊藍色高亮 */
+        
+        /* 賦予優雅的滑入動畫，依序登場 */
+        animation: luxFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     .section:last-of-type {
         margin-bottom: 60px;
     }
 
-    /* 手機滑過或點擊時的奢華微互動 */
+    /* 為 5 款調酒設定手機登場時間差，創造流動感 */
+    .section:nth-of-type(1) { animation-delay: 0.2s; }
+    .section:nth-of-type(2) { animation-delay: 0.35s; }
+    .section:nth-of-type(3) { animation-delay: 0.5s; }
+    .section:nth-of-type(4) { animation-delay: 0.65s; }
+    .section:nth-of-type(5) { animation-delay: 0.8s; }
+
+    /* 💻 桌面端（電腦）滑鼠互動體驗 */
     @media (hover: hover) {
         .section:hover {
-            transform: translateY(-3px); /* 優雅上浮 */
-            background: rgba(197, 168, 128, 0.03); /* 極輕微的絲綢光澤襯底 */
+            transform: translateY(-4px);
+            background: rgba(197, 168, 128, 0.04);
+            box-shadow: 0 10px 30px rgba(26, 36, 33, 0.02);
         }
         .section:hover .drink {
-            color: var(--color-accent); /* 字體優雅轉霧金 */
+            color: var(--color-accent);
         }
     }
     
-    /* 觸控壓按回饋 */
+    /* 📱 行動端（手機）壓按觸覺回饋（極致關鍵！） */
     .section:active {
-        transform: scale(0.99) translateY(-1px);
-        opacity: 0.85;
+        transform: scale(0.97) translateY(0px); /* 輕微下沉回饋 */
+        background: rgba(197, 168, 128, 0.06) !important; /* 絲綢般微光襯底 */
+        transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1); /* 壓下去的反應要快 */
+    }
+    .section:active .drink {
+        color: var(--color-accent);
     }
 
     .menu-header {
@@ -119,7 +139,7 @@
     }
 
     .name {
-        font-size: 12px;
+        font-size: 11px;
         letter-spacing: 2px;
         font-weight: 600;
         color: var(--color-accent);
@@ -140,10 +160,10 @@
         color: var(--color-primary);
         margin-bottom: 14px;
         letter-spacing: 2px;
-        transition: var(--transition-lux); /* 讓字體顏色轉變極度滑順 */
+        transition: var(--transition-lux);
     }
 
-    /* 高級風味結構排版 */
+    /* 風味結構排版 */
     .meta-line {
         font-size: 12.5px;
         margin-bottom: 5px;
@@ -154,7 +174,7 @@
         color: var(--color-muted);
         font-weight: 500;
         display: inline-block;
-        width: 45px; /* 回歸中文字體的完美精準對齊寬度 */
+        width: 45px;
     }
 
     .meta-content {
@@ -179,13 +199,40 @@
         text-align: center;
         letter-spacing: 2px;
         line-height: 2;
+        animation: luxFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation-delay: 1s;
+    }
+
+    /* RWD 手機版精緻邊距微調 */
+    @media (max-width: 480px) {
+        body {
+            padding: 50px 20px;
+        }
+        .container::before {
+            top: 15px; left: 15px; right: 15px; bottom: 15px; /* 讓邊框跟著螢幕大小呼吸縮放 */
+        }
+        .drink {
+            font-size: 19px; /* 手機上更優雅的字體大小比例 */
+        }
+    }
+
+    /* 高級感登場動畫定義 */
+    @keyframes luxFadeUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     /* Print 印刷優化 */
     @media print {
         body { background: #fff; padding: 40px 20px; }
         .container::before { border: 1px solid #e2d9cd; }
-        .section { transform: none !important; background: none !important; }
+        .section { transform: none !important; background: none !important; animation: none !important; }
     }
 </style>
 </head>
@@ -205,7 +252,6 @@
     </header>
 
     <main>
-        <!-- 01 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°01</div>
@@ -220,7 +266,6 @@
             <div class="notes">✦ 清爽 ・ 微酸 ・ 茶香收尾</div>
         </div>
 
-        <!-- 02 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°02</div>
@@ -235,7 +280,6 @@
             <div class="notes">✦ 果香 ・ 乳酸感 ・ 輕盈易飲</div>
         </div>
 
-        <!-- 03 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°03</div>
@@ -250,7 +294,6 @@
             <div class="notes">✦ 茶香 ・ 果香平衡 ・ 乾淨收尾</div>
         </div>
 
-        <!-- 04 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°04</div>
@@ -265,7 +308,6 @@
             <div class="notes">✦ 多汁 ・ 熱帶果香 ・ 低酒感</div>
         </div>
 
-        <!-- 05 -->
         <div class="section">
             <div class="menu-header">
                 <div class="name">N°05</div>
