@@ -7,12 +7,11 @@
 
 <style>
     :root {
-        --color-bg: #FAF9F6;       /* 暖象牙白 */
-        --color-primary: #1A2421;  /* 暮色深綠 */
-        --color-secondary: #5A6561;/* 柔和灰綠 */
-        --color-accent: #C5A880;   /* 霧金 */
-        --color-muted: #9A8F80;    /* 灰金 */
-        /* 採用更為高級的、接近物理阻尼感的自定義貝茲曲線 */
+        --color-bg: #FAF9F6;
+        --color-primary: #1A2421;
+        --color-secondary: #5A6561;
+        --color-accent: #C5A880;
+        --color-muted: #9A8F80;
         --transition-lux: all 0.7s cubic-bezier(0.15, 0.85, 0.35, 1); 
     }
 
@@ -21,203 +20,91 @@
         padding: 0;
         background: var(--color-bg);
         color: var(--color-primary);
-        /* 💡 高級手法：強迫啟動頂級字體渲染與古典連字 */
-        font-family: "Times New Roman", Times, "Noto Serif TC", "PingFang TC", "Songti TC", serif;
+        font-family: "Palatino Linotype", "Book Antiqua", "Noto Serif TC", "PingFang TC", serif;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
-        font-variant-ligatures: common-ligatures;
-        
-        /* 保護介面體驗，防止手機不小心長按框選到大範圍文字 */
-        -webkit-user-select: none;
         user-select: none;
     }
 
-    /* 📜 核心大氣留白畫布 */
     .menu-canvas {
         max-width: 460px;
         margin: 0 auto;
-        /* 使用 clamp 讓上下留白隨螢幕尺寸完美呼吸縮放 */
         padding: clamp(60px, 12vh, 100px) clamp(24px, 8vw, 40px);
         box-sizing: border-box;
     }
 
-    /* Header Styling */
     header {
         text-align: center;
         margin-bottom: clamp(48px, 8vh, 64px);
-        position: relative;
-        /* 優雅登場 */
         animation: luxFadeUp 1.4s cubic-bezier(0.15, 0.85, 0.35, 1) both;
     }
 
-    h1 {
-        font-size: 24px;
-        letter-spacing: 0.25em; /* 採用 em 單位確保字距與字型完美聯動 */
-        margin: 0 0 12px 0;
-        font-weight: 500;
-        color: var(--color-primary);
-    }
-
-    .sub {
-        font-size: 11px;
-        color: var(--color-accent);
-        letter-spacing: 0.3em;
-        margin-bottom: 32px;
-        font-weight: 500;
-        text-transform: uppercase;
-    }
-
+    h1 { font-size: 24px; letter-spacing: 0.25em; margin: 0 0 12px 0; font-weight: 500; }
+    .sub { font-size: 11px; color: var(--color-accent); letter-spacing: 0.3em; margin-bottom: 40px; font-weight: 500; text-transform: uppercase; }
+    
     .quote {
-        font-size: 13.5px;
-        color: var(--color-secondary);
+        font-size: 14px;
+        color: var(--color-primary);
         max-width: 320px;
         margin: 0 auto;
-        line-height: 1.9;
-        letter-spacing: 0.08em;
+        line-height: 2.2;
+        letter-spacing: 0.15em;
+        font-style: italic;
+        opacity: 0.85;
     }
+    
+    .divider { width: 30px; height: 1px; background: var(--color-accent); margin: 50px auto; opacity: 0.4; }
 
-    .divider {
-        width: 30px;
-        height: 1px;
-        background: var(--color-accent);
-        margin: 40px auto;
-        opacity: 0.4;
-    }
-
-    /* 🍸 Menu Section - 頂級微互動區塊 */
     .section {
         margin-bottom: 36px;
-        position: relative;
         padding: 20px 16px;
         margin-left: -16px;
         margin-right: -16px;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0);
         transition: var(--transition-lux);
         cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-        
-        /* 依序登場起動 */
         animation: luxFadeUp 1.4s cubic-bezier(0.15, 0.85, 0.35, 1) both;
     }
 
-    .section:last-of-type {
-        margin-bottom: 48px;
-    }
-
-    /* 靈動的時間差延遲（Staggered Animation） */
     .section:nth-of-type(1) { animation-delay: 0.15s; }
     .section:nth-of-type(2) { animation-delay: 0.28s; }
     .section:nth-of-type(3) { animation-delay: 0.41s; }
     .section:nth-of-type(4) { animation-delay: 0.54s; }
     .section:nth-of-type(5) { animation-delay: 0.67s; }
 
-    /* 💻 電腦端優雅懸停 */
     @media (hover: hover) {
-        .section:hover {
-            transform: translateY(-4px);
-            background: rgba(197, 168, 128, 0.03);
-        }
-        .section:hover .drink {
-            color: var(--color-accent);
-        }
+        .section:hover { transform: translateY(-4px); background: rgba(197, 168, 128, 0.03); }
+        .section:hover .drink { color: var(--color-accent); }
     }
     
-    /* 📱 手機端點擊 - 仿實體紙張微微下沉與微光暈染 */
     .section.is-active {
         transform: scale(0.975);
         background: rgba(197, 168, 128, 0.04);
-        /* 反應時間極快，創造清脆的觸感反饋 */
         transition: all 0.12s cubic-bezier(0.15, 0.85, 0.35, 1); 
     }
-    .section.is-active .drink {
-        color: var(--color-accent);
-    }
+    .section.is-active .drink { color: var(--color-accent); }
 
-    .menu-header {
-        margin-bottom: 6px;
-    }
+    .name { font-size: 11px; letter-spacing: 0.15em; font-weight: 600; color: var(--color-accent); margin-bottom: 6px; }
+    .tagline { font-size: 11.5px; font-style: italic; color: var(--color-muted); margin-bottom: 16px; letter-spacing: 0.05em; }
+    .drink { font-size: 20px; font-weight: 600; color: var(--color-primary); margin-bottom: 16px; letter-spacing: 0.1em; transition: var(--transition-lux); }
+    .meta-line { font-size: 12.5px; margin-bottom: 6px; letter-spacing: 0.04em; }
+    .meta-label { color: var(--color-muted); font-weight: 500; display: inline-block; width: 45px; }
+    .meta-content { color: var(--color-secondary); }
+    .notes { font-size: 11.5px; color: var(--color-accent); font-style: italic; font-weight: 500; margin-top: 16px; letter-spacing: 0.08em; }
 
-    .name {
-        font-size: 11px;
-        letter-spacing: 0.15em;
-        font-weight: 600;
-        color: var(--color-accent);
-    }
-
-    .tagline {
-        font-size: 11.5px;
-        font-style: italic;
-        color: var(--color-muted);
-        margin-bottom: 16px;
-        letter-spacing: 0.05em;
-    }
-
-    .drink {
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--color-primary);
-        margin-bottom: 16px;
-        letter-spacing: 0.1em;
-        transition: var(--transition-lux);
-    }
-
-    .meta-line {
-        font-size: 12.5px;
-        margin-bottom: 6px;
-        letter-spacing: 0.04em;
-    }
-
-    .meta-label {
-        color: var(--color-muted);
-        font-weight: 500;
-        display: inline-block;
-        width: 45px;
-    }
-
-    .meta-content {
-        color: var(--color-secondary);
-    }
-
-    .notes {
-        font-size: 11.5px;
-        color: var(--color-accent);
-        font-style: italic;
-        font-weight: 500;
-        margin-top: 16px;
-        letter-spacing: 0.08em;
-    }
-
-    /* Footer Styling */
     footer {
         margin-top: 80px;
-        font-size: 10px;
-        color: var(--color-muted);
         text-align: center;
-        letter-spacing: 0.25em;
-        line-height: 2.2;
         animation: luxFadeUp 1.4s cubic-bezier(0.15, 0.85, 0.35, 1) both;
         animation-delay: 0.8s;
     }
+    .footer-text { font-size: 10px; color: var(--color-muted); letter-spacing: 0.25em; margin-bottom: 12px; }
+    .curated { display: block; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 24px; opacity: 0.8; }
+    .copyright { font-size: 8px; color: var(--color-muted); letter-spacing: 0.1em; opacity: 0.5; }
 
-    /* 登場動畫：柔和地兼顧位移與透明度 */
     @keyframes luxFadeUp {
-        0% {
-            opacity: 0;
-            transform: translateY(24px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* 🖨️ 完美的印刷級優化（當你想把這張網頁印成實體紙張時） */
-    @media print {
-        body { background: #fff; }
-        .menu-canvas { padding: 40px 20px; }
-        .section { transform: none !important; background: none !important; animation: none !important; }
+        0% { opacity: 0; transform: translateY(24px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 </style>
 </head>
@@ -225,25 +112,23 @@
 <body>
 
 <div class="menu-canvas">
-
     <header>
         <h1>AFTER RAIN TEA BAR</h1>
         <div class="sub">一晚限定 ｜ 山林雨後茶酒吧</div>
+        
         <div class="quote">
-            「雨停了，風還沒涼。
-            <br>在夜色點燃以前，借一場山林的雨後微醺。」
+            「雨停了，風還沒涼。<br>
+            在夜色點燃以前，借一場山林的雨後微醺。」
         </div>
+        
         <div class="divider"></div>
     </header>
 
     <main>
         <div class="section">
-            <div class="menu-header">
-                <div class="name">N°01</div>
-            </div>
+            <div class="name">N°01</div>
             <div class="drink">翠釀聽雨</div>
             <div class="tagline">雨停之後的第一口空氣</div>
-            
             <div class="meta-line">
                 <span class="meta-label">基底</span>
                 <span class="meta-content">梅酒 ・ 高山烏龍 ・ 檸檬 ・ 氣泡水</span>
@@ -252,12 +137,9 @@
         </div>
 
         <div class="section">
-            <div class="menu-header">
-                <div class="name">N°02</div>
-            </div>
+            <div class="name">N°02</div>
             <div class="drink">繾綣晨霧</div>
             <div class="tagline">悶熱空氣中的微微觸電感</div>
-            
             <div class="meta-line">
                 <span class="meta-label">基底</span>
                 <span class="meta-content">乳酸氣泡酒 ・ 水蜜桃烏龍 ・ 檸檬 ・ 氣泡水</span>
@@ -266,12 +148,9 @@
         </div>
 
         <div class="section">
-            <div class="menu-header">
-                <div class="name">N°03</div>
-            </div>
+            <div class="name">N°03</div>
             <div class="drink">冷露尋茶</div>
-            <div class="tagline">茶成為結構的輪廓</div>
-            
+            <div class="tagline">在深山中發現的一抹清涼</div>
             <div class="meta-line">
                 <span class="meta-label">基底</span>
                 <span class="meta-content">茶琴酒 ・ 水蜜桃烏龍 ・ 檸檬 ・ 氣泡水</span>
@@ -280,12 +159,9 @@
         </div>
 
         <div class="section">
-            <div class="menu-header">
-                <div class="name">N°04</div>
-            </div>
+            <div class="name">N°04</div>
             <div class="drink">熾陽拾果</div>
             <div class="tagline">雨後叢林的果香爆發</div>
-            
             <div class="meta-line">
                 <span class="meta-label">基底</span>
                 <span class="meta-content">鳳梨芒果酒 ・ 百香果氣泡 ・ 氣泡水</span>
@@ -294,12 +170,9 @@
         </div>
 
         <div class="section">
-            <div class="menu-header">
-                <div class="name">N°05</div>
-            </div>
+            <div class="name">N°05</div>
             <div class="drink">篝火夜語</div>
             <div class="tagline">收帳篷前的最後一杯溫度</div>
-            
             <div class="meta-line">
                 <span class="meta-label">基底</span>
                 <span class="meta-content">椪糖酒 ・ 咖啡利口酒 ・ 牛奶</span>
@@ -309,25 +182,17 @@
     </main>
 
     <footer>
-        手作茶酒工藝 ｜ 建議慢飲以感受層次流動
-        <br>
-        AFTER RAIN TEA BAR ©
+        <div class="footer-text">手作茶酒工藝 ｜ 建議慢飲以感受層次流動</div>
+        <div class="curated">Curated by CHIH</div>
+        <div class="copyright">AFTER RAIN TEA BAR © 2026</div>
     </footer>
-
 </div>
 
 <script>
     document.querySelectorAll('.section').forEach(item => {
-        item.addEventListener('touchstart', () => {
-            item.classList.add('is-active');
-        }, { passive: true });
-        
-        item.addEventListener('touchend', () => {
-            item.classList.remove('is-active');
-        }, { passive: true });
-        item.addEventListener('touchcancel', () => {
-            item.classList.remove('is-active');
-        }, { passive: true });
+        item.addEventListener('touchstart', () => { item.classList.add('is-active'); }, { passive: true });
+        item.addEventListener('touchend', () => { item.classList.remove('is-active'); }, { passive: true });
+        item.addEventListener('touchcancel', () => { item.classList.remove('is-active'); }, { passive: true });
     });
 </script>
 
